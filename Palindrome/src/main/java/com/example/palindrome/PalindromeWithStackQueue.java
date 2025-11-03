@@ -1,6 +1,7 @@
 package com.example.palindrome;
 import java.util.Stack;
 import java.util.Queue;
+import java.util.LinkedList;
 public class PalindromeWithStackQueue {
 
     /**
@@ -12,7 +13,33 @@ public class PalindromeWithStackQueue {
      */
     public static boolean isPalindrome(String s)
     {
-        throw new UnsupportedOperationException("Not implemented yet");
+        // Validate input
+        if (s == null) {
+            throw new IllegalArgumentException("Input string must not be null");
+        }
+
+        // Normalize: remove non-alphanumeric and lowercase
+        String normalized = normalize(s);
+
+        // Use stack (LIFO) and queue (FIFO) to compare order
+        Stack<Character> stack = new Stack<>();
+        Queue<Character> queue = new LinkedList<>();
+
+        // Fill both structures with the normalized characters
+        for (char c : normalized.toCharArray()) {
+            stack.push(c);
+            queue.add(c);
+        }
+
+        // Pop from stack and remove from queue and compare
+        while (!queue.isEmpty()) {
+            Character fromStack = stack.pop();
+            Character fromQueue = queue.remove();
+            if (!fromStack.equals(fromQueue)) {
+                return false; // mismatch -> not a palindrome
+            }
+        }
+        return true; // all matched -> palindrome
     }
 
     // Optional helper method for normalization

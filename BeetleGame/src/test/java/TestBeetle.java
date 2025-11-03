@@ -21,7 +21,19 @@ class TestBeetle {
 
 	@Test
 	void testBeetle() {
-		fail("Not yet implemented");
+		Beetle b = new Beetle();
+		// initially no body
+		assertFalse(b.addHead());
+		assertTrue(b.addBody());
+		assertTrue(b.addHead());
+		assertTrue(b.addEye());
+		assertTrue(b.addEye());
+		assertTrue(b.addFeeler());
+		assertTrue(b.addFeeler());
+		for (int i = 0; i < 6; i++) assertTrue(b.addLeg());
+		assertTrue(b.addTail());
+		// now should be complete
+		assertTrue(b.isComplete());
 	}
 
 	@Test
@@ -44,7 +56,14 @@ class TestBeetle {
 
 	@Test
 	void testAddEye() {
-		fail("Not yet implemented");
+		Beetle beetle = new Beetle();
+		assertFalse(beetle.addEye());
+		assertTrue(beetle.addBody());
+		assertFalse(beetle.addEye());
+		assertTrue(beetle.addHead());
+		assertTrue(beetle.addEye());
+		assertTrue(beetle.addEye());
+		assertFalse(beetle.addEye());
 	}
 
 	@Test
@@ -63,22 +82,44 @@ class TestBeetle {
 
 	@Test
 	void testAddLeg() {
-		fail("Not yet implemented");
+		Beetle beetle = new Beetle();
+		assertFalse(beetle.addLeg());
+		assertTrue(beetle.addBody());
+		for (int i = 0; i < 6; i++) assertTrue(beetle.addLeg());
+		assertFalse(beetle.addLeg());
 	}
 
 	@Test
 	void testAddTail() {
-		fail("Not yet implemented");
+		Beetle beetle = new Beetle();
+		assertFalse(beetle.addTail());
+		assertTrue(beetle.addBody());
+		assertTrue(beetle.addTail());
+		assertFalse(beetle.addTail());
 	}
 
 	@Test
 	void testIsComplete() {
-		fail("Not yet implemented");
+		Beetle b = new Beetle();
+		assertFalse(b.isComplete());
+		b.addBody(); b.addHead(); b.addEye(); b.addEye(); b.addFeeler(); b.addFeeler();
+		for (int i=0;i<6;i++) b.addLeg();
+		b.addTail();
+		assertTrue(b.isComplete());
 	}
 
 	@Test
 	void testToString() {
-		fail("Not yet implemented");
+		Beetle b = new Beetle();
+		assertEquals(" ", b.toString());
+		b.addBody();
+		String s = b.toString();
+		assertNotNull(s);
+		// when complete, string should contain '#'
+		b.addHead(); b.addEye(); b.addEye(); b.addFeeler(); b.addFeeler();
+		for (int i=0;i<6;i++) b.addLeg();
+		b.addTail();
+		assertTrue(b.toString().contains("#"));
 	}
 
 }
